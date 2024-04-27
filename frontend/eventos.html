@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Eventos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #333, #555); /* Fondo con gradiente gris oscuro */
+            color: #ffffff; /* Texto blanco para buen contraste */
+        }
+        .container {
+            margin-top: 30px;
+            background: rgba(51, 51, 51, 0.7); /* Fondo gris oscuro para el contenedor */
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .form-control {
+            background-color: rgba(68, 68, 68, 0.9); /* Campos con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco para contraste */
+            border-color: #888; /* Bordes grises */
+        }
+        .btn {
+            background-color: #666; /* Botón con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco */
+        }
+        .btn:hover {
+            background-color: #777; /* Fondo más claro para hover */
+        }
+        .card {
+            background-color: rgba(51, 51, 51, 0.9); /* Fondo para tarjetas */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .table {
+            background-color: rgba(68, 68, 68, 0.9); /* Fondo gris para la tabla */
+            color: #ffffff; /* Texto blanco para legibilidad */
+        }
+        .table th {
+            background-color: #555; /* Fondo para encabezados de tabla */
+            color: #ffffff; /* Texto blanco para encabezados */
+        }
+        .title {
+            color: #ffffff; /* Títulos y encabezados en color blanco */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="has-text-centered has-text-weight-bold">Gestión de Eventos</h1>
+
+        <!-- Formulario para agregar un nuevo evento -->
+        <div class="card">
+            <div class="card-content">
+                <h3 class="title">Agregar Evento</h3>
+                <form>
+                    <div class="form-group">
+                        <label para="idevento">ID del Evento</label>
+                        <input para="number" class="form-control" id="idevento" placeholder="ID del Evento">
+                    </div>
+                    <div class="form-group">
+                        <label para="nombreE">Nombre del Evento</label>
+                        <input para="text" class="form-control" id="nombreE" placeholder="Nombre del Evento">
+                    </div>
+                    <div class="form-group">
+                        <label para="cantidad_p">Cantidad de Participantes</label>
+                        <input para="number" class="form-control" id="cantidad_p" placeholder="Cantidad de Participantes">
+                    </div>
+                    <div class="form-group">
+                        <label para="fechas">Fechas</label>
+                        <input para="date" class="form-control" id="fechas">
+                    </div>
+                    <div class="form-group">
+                        <label para="horarioInicio">Horario de Inicio</label>
+                        <input para="time" class="form-control" id="horarioInicio">
+                    </div>
+                    <div class="form-group">
+                        <label para="horaFinalizacion">Hora de Finalización</label>
+                        <input para="time" class="form-control" id="horaFinalizacion">
+                    </div>
+                    <div class="form-group">
+                        <label para="modalidad">Modalidad</label>
+                        <select class="form-control" id="modalidad">
+                            <option value="Ruta">Ruta</option>
+                            <option value="Montaña">Montaña</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label para="clasificacion">Clasificación</label>
+                        <select class="form-control" id="clasificacion">
+                            <option value="novatos">Novatos</option>
+                            <option value="amateur">Amateur</option>
+                            <option value="expertos">Expertos</option>
+                            <option value="mayores40">Mayores de 40</option>
+                            <option value="mayores50">Mayores de 50</option>
+                            <option value="mayores60">Mayores de 60</option>
+                            <option value="todas">Todas las modalidades</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label para="idruta">ID de la Ruta</label>
+                        <input para="number" class="form-control" id="idruta" placeholder="ID de la Ruta">
+                    </div>
+                    <div class="form-group">
+                        <label para="idcarrera">ID de la Carrera</label>
+                        <input para="number" class="form-control" id="idcarrera" placeholder="ID de la Carrera">
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light">Agregar Evento</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección para mostrar eventos registrados -->
+        <div class="card mt-3">
+            <div class="card-content">
+                <h3 class="title">Eventos Registrados</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID del Evento</th>
+                            <th>Nombre</th>
+                            <th>Cantidad de Participantes</th>
+                            <th>Fechas</th>
+                            <th>Horario de Inicio</th>
+                            <th>Hora de Finalización</th>
+                            <th>Modalidad</th>
+                            <th>Clasificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Datos de ejemplo para eventos -->
+                        <tr>
+                            <td>1</td>
+                            <td>Evento A</td>
+                            <td>100</td>
+                            <td>2024-05-01</td>
+                            <td>08:00</td>
+                            <td>12:00</td>
+                            <td>Ruta</td>
+                            <td>Amateur</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Evento B</td>
+                            <td>150</td>
+                            <td>2024-06-15</td>
+                            <td>09:00</td>
+                            <td>14:00</td>
+                            <td>Montaña</td>
+                            <td>Expertos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+

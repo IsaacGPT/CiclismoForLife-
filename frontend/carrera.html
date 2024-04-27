@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Carreras</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #838881, #747872); /* Fondo con gradiente gris oscuro */
+            color: #ffffff; /* Texto blanco para contraste */
+        }
+        .container {
+            margin-top: 30px;
+            background: rgba(51, 51, 51, 0.7); /* Fondo translúcido en tonos grises */
+            padding: 30px;
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* Sombra para añadir profundidad */
+        }
+        .form-control {
+            background-color: rgba(68, 68, 68, 0.9); /* Campos con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco para contraste */
+            border-color: #999; /* Bordes grises */
+        }
+        .btn {
+            background-color: #666; /* Botón con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco */
+            border-radius: 10px; /* Bordes redondeados para botones */
+        }
+        .btn:hover {
+            background-color: #777; /* Fondo más claro para hover */
+        }
+        .card {
+            background-color: rgba(51, 51, 51, 0.9); /* Fondo para tarjetas translúcido */
+            border-radius: 15px; /* Bordes redondeados */
+        }
+        .title {
+            color: #ffffff; /* Títulos y encabezados en color blanco */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="has-text-centered has-text-weight-bold">Gestión de Carreras</h1>
+
+        <!-- Formulario para agregar una nueva carrera -->
+        <div class="card">
+            <div class="card-content">
+                <h3 class="title">Agregar Carrera</h3>
+                <form>
+                    <div class="form-group">
+                        <label para="idcarrera">ID de la Carrera</label>
+                        <input para="number" class="form-control" id="idcarrera" placeholder="ID de la Carrera">
+                    </div>
+                    <div class="form-group">
+                        <label para="horarioC">Horario de la Carrera</label>
+                        <input para="time" class="form-control" id="horarioC">
+                    </div>
+                    <div class="form-group">
+                        <label para="Cantidad_participantes">Cantidad de Participantes</label>
+                        <input para="number" class="form-control" id="Cantidad_participantes" placeholder="Cantidad de Participantes">
+                    </div>
+                    <div class="form-group">
+                        <label para="PuntosC">Puntos de la Carrera</label>
+                        <input para="number" class="form-control" id="PuntosC" placeholder="Puntos de la Carrera">
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light">Agregar Carrera</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap.min.js"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

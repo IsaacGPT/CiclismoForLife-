@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Equipos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: rgba(44, 44, 44, 0.9); /* Fondo oscuro con opacidad */
+            color: rgba(245, 245, 245, 0.9); /* Color de texto claro */
+        }
+        .container {
+            margin-top: 30px;
+            background-color: rgba(51, 51, 51, 0.7); /* Fondo del contenedor con opacidad */
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados para mejorar el estilo */
+        }
+        .form-control {
+            background-color: rgba(44, 44, 44, 0.6); /* Campos del formulario con opacidad */
+            color: rgba(245, 245, 245, 0.9); /* Texto claro */
+            border-color: rgba(68, 68, 68, 0.8); /* Bordes oscuros */
+        }
+        .btn {
+            background-color: rgba(68, 68, 68, 0.8); /* Botón con fondo oscuro */
+            color: rgba(245, 245, 245, 0.9); /* Texto claro */
+        }
+        .btn:hover {
+            background-color: rgba(85, 85, 85, 0.8); /* Botón en hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Gestión de Equipos</h1>
+        <h3>Agregar Equipo</h3>
+        <form>
+            <div class="form-group">
+                <label for="idequipo">ID del Equipo</label>
+                <input type="number" class="form-control" id="idequipo" placeholder="ID del Equipo">
+            </div>
+            <div class="form-group">
+                <label for="nombre_eq">Nombre del Equipo</label>
+                <input type="text" class="form-control" id="nombre_eq" placeholder="Nombre del Equipo">
+            </div>
+            <div class="form-group">
+                <label para="cant_integrantes">Cantidad de Integrantes</label>
+                <input type="number" class="form-control" id="cant_integrantes" placeholder="Cantidad de Integrantes">
+            </div>
+            <div class="form-group">
+                <label para="modalidad_e">Modalidad del Equipo</label>
+                <select class="form-control" id="modalidad_e">
+                    <option value="M">Montaña (M)</option>
+                    <option value="R">Ruta (R)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-block">Agregar Equipo</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

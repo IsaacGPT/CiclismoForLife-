@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Rutas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #838881, #747872); /* Fondo con gradiente gris oscuro */
+            color: #ffffff; /* Texto blanco para buen contraste */
+        }
+        .container {
+            margin-top: 30px;
+            background: rgba(51, 51, 51, 0.7); /* Fondo gris oscuro translúcido */
+            padding: 30px;
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* Sombra para añadir profundidad */
+        }
+        .form-control {
+            background-color: rgba(68, 68, 68, 0.9); /* Campos con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco para contraste */
+            border-color: #999; /* Bordes grises */
+        }
+        .btn {
+            background-color: #666; /* Botón con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .btn:hover {
+            background-color: #777; /* Fondo más claro para hover */
+        }
+        .card {
+            background-color: rgba(51, 51, 51, 0.9); /* Fondo translúcido para tarjetas */
+            border-radius: 15px; /* Bordes redondeados */
+        }
+        .title {
+            color: #ffffff; /* Títulos y encabezados en color blanco */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="has-text-centered has-text-weight-bold">Gestión de Rutas</h1>
+
+        <!-- Formulario para agregar una nueva ruta -->
+        <div class="card">
+            <div class="card-content">
+                <h3 class="title">Agregar Ruta</h3>
+                <form>
+                    <div class="form-group">
+                        <label para="idruta">ID de la Ruta</label>
+                        <input para="number" class="form-control" id="idruta" placeholder="ID de la Ruta">
+                    </div>
+                    <div class="form-group">
+                        <label para="nombre_ruta">Nombre de la Ruta</label>
+                        <input para="text" class="form-control" id="nombre_ruta" placeholder="Nombre de la Ruta">
+                    </div>
+                    <div class="form-group">
+                        <label para="ubicacion">Ubicación</label>
+                        <input para="text" class="form-control" id="ubicacion" placeholder="Ubicación de la Ruta">
+                    </div>
+                    <div class="form-group">
+                        <label para="distancia">Distancia</label>
+                        <input para="text" class="form-control" id="distancia" placeholder="Distancia">
+                    </div>
+                    <div class="form-group">
+                        <label para="idcarrera">ID de la Carrera</label>
+                        <input para="number" class="form-control" id="idcarrera" placeholder="ID de la Carrera">
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light">Agregar Ruta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>

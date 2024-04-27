@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Jueces</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #333, #555); /* Fondo con gradiente gris oscuro */
+            color: #ffffff; /* Texto blanco para buen contraste */
+        }
+        .container {
+            margin-top: 30px;
+            background: rgba(51, 51, 51, 0.7); /* Fondo gris oscuro */
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .form-control {
+            background-color: rgba(68, 68, 68, 0.9); /* Campos con fondo gris */
+            color: #ffffff; /* Texto blanco para mejor contraste */
+            border-color: #888; /* Bordes grises */
+        }
+        .btn {
+            background-color: #666; /* Botón con fondo gris oscuro */
+            color: #ffffff; /* Texto blanco */
+        }
+        .btn:hover {
+            background-color: #777; /* Botón en hover */
+        }
+        .card {
+            background-color: rgba(51, 51, 51, 0.9); /* Fondo para tarjetas */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .table {
+            background-color: rgba(68, 68, 68, 0.9); /* Fondo gris para la tabla */
+            color: #ffffff; /* Texto blanco */
+        }
+        .table th {
+            background-color: #555; /* Fondo para encabezados de tabla */
+            color: #ffffff; /* Texto blanco para encabezados */
+        }
+        .title {
+            color: #ffffff; /* Títulos y encabezados en color blanco */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="has-text-centered has-text-weight-bold">Registro de Jueces</h1>
+
+        <!-- Formulario para agregar un nuevo juez -->
+        <div class="card">
+            <div class="card-content">
+                <h3 class="title">Agregar Juez</h3>
+                <form>
+                    <div class="form-group">
+                        <label para="idjuez">ID del Juez</label>
+                        <input para="number" class="form-control" id="idjuez" placeholder="ID del Juez">
+                    </div>
+                    <div class="form-group">
+                        <label para="nombrej">Nombre</label>
+                        <input para="text" class="form-control" id="nombrej" placeholder="Nombre del Juez">
+                    </div>
+                    <div class="form-group">
+                        <label para="apellidos">Apellidos</label>
+                        <input para="text" class="form-control" id="apellidos" placeholder="Apellidos del Juez">
+                    </div>
+                    <div class="form-group">
+                        <label para="curp">CURP</label>
+                        <input para="text" class="form-control" id="curp" placeholder="CURP del Juez">
+                    </div>
+                    <div class="form-group">
+                        <label para="correo_electronico">Correo Electrónico</label>
+                        <input para="email" class="form-control" id="correo_electronico" placeholder="Correo Electrónico">
+                    </div>
+                    <div class="form-group">
+                        <label para="especialidad">Especialidad</label>
+                        <input para="text" class="form-control" id="especialidad" placeholder="Especialidad del Juez">
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light">Agregar Juez</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección para mostrar jueces registrados -->
+        <div class="card mt-3">
+            <div class="card-content">
+                <h3 class="title">Jueces Registrados</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID del Juez</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>CURP</th>
+                            <th>Correo Electrónico</th>
+                            <th>Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Datos de ejemplo para jueces -->
+                        <tr>
+                            <td>1</td>
+                            <td>Juan</td>
+                            <td>Martínez</td>
+                            <td>XYZ12345ABC</td>
+                            <td>juan.martinez@example.com</td>
+                            <td>Contador de puntos</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Ana</td>
+                            <td>López</td>
+                            <td>ABC12345XYZ</td>
+                            <td>ana.lopez@example.com</td>
+                            <td>Presentador</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
