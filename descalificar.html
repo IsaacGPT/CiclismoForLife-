@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descalificar Corredores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #191414;
+            color: #1DB954;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            color: #1DB954;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 20px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .form-title {
+            color: #00bfff;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+        }
+
+        .form-control {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+        }
+
+        .submit-btn {
+            background-color: #00bfff;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #00bfff96;
+        }
+
+        .registros-container {
+            background-color: #121212;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        .registro {
+            background-color: #191414;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #1DB954;
+        }
+
+        .registro strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            color: #1DB954;
+        }
+
+        .footer {
+            text-align: center;
+            color: #1DB954;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Descalificaciones</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <p class="form-title">Descalificar Corredores</p>
+                    <form>
+                        <div class="form-group">
+                            <label for="corredor" class="form-label">Número del Corredor</label>
+                            <select class="form-control" id="corredor" onchange="llenarDatos()">
+                                <option value="" disabled selected>Selecciona un corredor</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="nombre" class="form-label">Nombre del Corredor</label>
+                                <input type="text" class="form-control" id="nombre" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="evento" class="form-label">Evento</label>
+                                <input type="text" class="form-control" id="evento" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="razon" class="form-label">Razón de la Descalificación</label>
+                            <textarea class="form-control" id="razon" rows="3"></textarea>
+                        </div>
+
+                        <button type="button" class="submit-btn" onclick="descalificarCorredor()">Descalificar Corredor</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="registros-container">
+                    <h3>Corredores Descalificados</h3>
+                    <div id="registros"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">Todos los derechos reservados a LongRaceCC</div>
+    </div>
+
+    <script>
+        const corredores = {
+            1: { nombre: "Juan Pérez", evento: "Maratón 2023" },
+            2: { nombre: "María García", evento: "Carrera 10K 2023" },
+            3: { nombre: "Carlos Sánchez", evento: "Triatlón 2023" },
+            4: { nombre: "Lucía Fernández", evento: "Carrera 5K 2023" },
+            5: { nombre: "Miguel Ramírez", evento: "Ultra Maratón 2023" },
+	    6: { nombre: "Richtofen", evento: "Alcatraz 2023" },
+	    7: { nombre: "Peterparker", evento: "LongRacing 2023" },
+        };
+
+        function llenarDatos() {
+            const corredorSelect = document.getElementById("corredor").value;
+            if (corredorSelect) {
+                const corredor = corredores[corredorSelect];
+                document.getElementById("nombre").value = corredor.nombre;
+                document.getElementById("evento").value = corredor.evento;
+            } else {
+                document.getElementById("nombre").value = '';
+                document.getElementById("evento").value = '';
+            }
+        }
+
+        function descalificarCorredor() {
+            const corredorSelect = document.getElementById("corredor").value;
+            const razon = document.getElementById("razon").value;
+
+            if (!corredorSelect || !razon) {
+                alert("Por favor completa todos los campos.");
+                return;
+            }
+
+            let descalificados = JSON.parse(localStorage.getItem("descalificados")) || {};
+            if (!descalificados[corredorSelect]) {
+                descalificados[corredorSelect] = [];
+            }
+
+            descalificados[corredorSelect].push({ razon });
+            localStorage.setItem("descalificados", JSON.stringify(descalificados));
+
+            mostrarDescalificados();
+            alert("Corredor descalificado correctamente.");
+        }
+
+        function mostrarDescalificados() {
+            const descalificados = JSON.parse(localStorage.getItem("descalificados")) || {};
+            const registrosContainer = document.getElementById("registros");
+            registrosContainer.innerHTML = '';
+
+            for (const corredor in descalificados) {
+                const corredorData = corredores[corredor];
+                const registrosCorredor = descalificados[corredor];
+                let registroHTML = `<div class="registro"><strong>${corredorData.nombre} (${corredorData.evento})</strong><ul>`;
+
+                registrosCorredor.forEach(registro => {
+                    registroHTML += `<li>Razón: ${registro.razon}</li>`;
+                });
+
+                registroHTML += '</ul></div>';
+                registrosContainer.innerHTML += registroHTML;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", mostrarDescalificados);
+    </script>
+</body>
+</html>

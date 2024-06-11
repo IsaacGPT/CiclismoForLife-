@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LongRaceCC- Mapas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1DB954;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .left-corner-buttons {
+      display: flex;
+    }
+
+    header button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: color 0.3s ease;
+    }
+
+    header button:hover {
+      color: #25B960;
+    }
+
+    main {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    section {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 30px;
+      background-color: #1F1F1F;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #1DB954;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .btn {
+      background-color: #1DB954;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #25B960;
+    }
+
+    .details-container {
+      width: 100%;
+      background-color: #121212;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    .details-container h3 {
+      color: #1DB954;
+      margin-bottom: 10px;
+    }
+
+    .details-container p {
+      margin: 5px 0;
+    }
+
+    .details-container ul {
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    #map {
+      height: 50vh;
+      width: 100%;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container {
+      background-color: #282828;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    .form-container h3 {
+      color: #1DB954;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ccc;
+    }
+
+    .form-container input, .form-container textarea, .form-container select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background-color: #25B960;
+    }
+
+    footer {
+      background-color: #1DB954;
+      padding: 10px 0;
+      text-align: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    footer .icon-buttons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    footer button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      transition: transform 0.3s ease;
+    }
+
+    footer button:hover {
+      transform: translateY(-5px);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #1F1F1F;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal-content input, .modal-content textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #282828;
+      color: #fff;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background-color: #25B960;
+    }
+
+    .modal-content .close {
+      color: #fff;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .modal-content .close:hover,
+    .modal-content .close:focus {
+      color: #aaa;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      #map {
+        height: 40vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="btnInicio"><i class="fas fa-home"></i></button>
+    <div class="left-corner-buttons">
+      <button class="emoji" id="btnNotificaciones" onclick="mostrarNotificaciones()"><i class="fas fa-heart"></i></button>
+      <button class="emoji" id="btnBuscar" onclick="mostrarBuscador()"><i class="fas fa-search"></i></button>
+      <button class="emoji" id="btnMensaje" onclick="mostrarMensaje()"><i class="far fa-paper-plane"></i></button>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Mapas</h2>
+      <div id="map"></div>
+
+      <div class="details-container">
+        <h3>Detalles del recorrido</h3>
+        <p><strong>Distancia:</strong> <span id="distancia">0 km</span></p>
+        <p><strong>Duración estimada:</strong> <span id="duracion">0 mins</span></p>
+        <p><strong>Elevación:</strong> <span id="elevacion">0 m</span></p>
+        <p><strong>Puntos de interés:</strong></p>
+        <ul id="puntosInteres">
+          <li>Parque Central</li>
+          <li>Cafetería Ciclista</li>
+          <li>Mirador de la Montaña</li>
+        </ul>
+      </div>
+
+      <div class="form-container">
+        <h3>Registrar Detalles del Recorrido</h3>
+        <label for="inputDistancia">Distancia (km):</label>
+        <input type="number" id="inputDistancia" placeholder="Distancia en km" />
+
+        <label for="inputDuracion">Duración estimada (mins):</label>
+        <input type="number" id="inputDuracion" placeholder="Duración estimada en mins" />
+
+        <label for="inputElevacion">Elevación (m):</label>
+        <input type="number" id="inputElevacion" placeholder="Elevación en metros" />
+
+        <label for="inputTipoTerreno">Tipo de Terreno:</label>
+        <select id="inputTipoTerreno">
+          <option value="Asfalto">Asfalto</option>
+          <option value="Grava">Grava</option>
+          <option value="Mixto">Mixto</option>
+          <option value="Montaña">Montaña</option>
+        </select>
+
+        <label for="inputDificultad">Dificultad:</label>
+        <select id="inputDificultad">
+          <option value="Fácil">Fácil</option>
+          <option value="Moderada">Moderada</option>
+          <option value="Difícil">Difícil</option>
+          <option value="Experto">Experto</option>
+        </select>
+
+        <label for="inputFecha">Fecha del recorrido:</label>
+        <input type="date" id="inputFecha" />
+
+        <label for="inputHora">Hora de inicio:</label>
+        <input type="time" id="inputHora" />
+
+        <button onclick="registrarDetalles()">Registrar</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="icon-buttons">
+      <button id="btnInicio" onclick="redirigir('INICIO IGPT.HTML')"><i class="fas fa-home"></i></button>
+      <button id="btnMapas" onclick="redirigir('MAPAS IGPT.HTML')"><i class="fas fa-map-marked-alt"></i></button>
+      <button id="btnRegistrar" onclick="redirigir('Registro.html')"><i class="fas fa-user-plus"></i></button>
+      <button id="btnGrupos" onclick="redirigir('GruposIGPT.html')"><i class="fas fa-users"></i></button>
+      <button id="btnTu" onclick="redirigir('PERFIL IGPT.HTML')"><i class="fas fa-user"></i></button>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Añadir Punto de Interés</h3>
+      <input type="text" id="puntoNombre" placeholder="Nombre del Punto" />
+      <textarea id="puntoDescripcion" placeholder="Descripción"></textarea>
+      <button onclick="addPunto()">Añadir</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map;
+
+    function initMap() {
+      map = L.map('map').setView([51.505, -0.09], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      L.marker([51.5, -0.09]).addTo(map).bindPopup('Ejemplo de ubicación 1');
+      L.marker([51.51, -0.1]).addTo(map).bindPopup('Ejemplo de ubicación 2');
+      L.marker([51.49, -0.1]).addTo(map).bindPopup('Ejemplo de ubicación 3');
+
+      updateRouteDetails(25, 90, 300);
+    }
+
+    function redirigir(pagina) {
+      window.location.href = pagina;
+    }
+
+    function updateRouteDetails(distancia, duracion, elevacion) {
+      document.getElementById('distancia').innerText = distancia + ' km';
+      document.getElementById('duracion').innerText = duracion + ' mins';
+      document.getElementById('elevacion').innerText = elevacion + ' m';
+    }
+
+    function registrarDetalles() {
+      var distancia = document.getElementById('inputDistancia').value;
+      var duracion = document.getElementById('inputDuracion').value;
+      var elevacion = document.getElementById('inputElevacion').value;
+      var tipoTerreno = document.getElementById('inputTipoTerreno').value;
+      var dificultad = document.getElementById('inputDificultad').value;
+      var fecha = document.getElementById('inputFecha').value;
+      var hora = document.getElementById('inputHora').value;
+
+      if (distancia && duracion && elevacion && tipoTerreno && dificultad && fecha && hora) {
+        updateRouteDetails(distancia, duracion, elevacion);
+        alert('Detalles del recorrido registrados exitosamente.');
+      } else {
+        alert('Por favor, completa todos los campos.');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function openModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function addPunto() {
+      var nombre = document.getElementById('puntoNombre').value;
+      var descripcion = document.getElementById('puntoDescripcion').value;
+
+      if (nombre && descripcion) {
+        var puntosInteres = document.getElementById('puntosInteres');
+        var li = document.createElement('li');
+        li.textContent = nombre + ": " + descripcion;
+        puntosInteres.appendChild(li);
+
+        closeModal();
+      } else {
+        alert('Por favor, completa todos los campos.');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initMap();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Usuarios</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #191414; /* Negro Spotify */
+            color: white;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            color: #1DB954; /* Verde Spotify */
+            margin-bottom: 20px;
+        }
+        .user-list {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #252525;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .user-item button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: #1DB954; /* Verde Spotify */
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        .user-item button:hover {
+            color: white;
+        }
+        .card-title {
+            color: #1DB954; /* Verde Spotify */
+            font-size: 1.5em;
+            line-height: normal;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+        .small-desc {
+            font-size: 1em;
+            font-weight: 400;
+            line-height: 1.5em;
+            color: #452c2c;
+        }
+        .go-corner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            width: 2em;
+            height: 2em;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1DB954, #191414); /* Verde Spotify y Negro */
+            border-radius: 0 4px 0 32px;
+        }
+        .go-arrow {
+            margin-top: -4px;
+            margin-right: -4px;
+            color: white;
+            font-family: courier, sans;
+        }
+        .card {
+            display: block;
+            position: relative;
+            max-width: 300px;
+            max-height: 320px;
+            background-color: #f2f8f9;
+            border-radius: 10px;
+            padding: 2em 1.2em;
+            margin: 12px;
+            text-decoration: none;
+            z-index: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #c3e6ec, #a7d1d9);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .card:before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: -16px;
+            right: -16px;
+            background: linear-gradient(135deg, #1DB954, #191414); /* Verde Spotify y Negro */
+            height: 32px;
+            width: 32px;
+            border-radius: 32px;
+            transform: scale(1);
+            transform-origin: 50% 50%;
+            transition: transform 0.35s ease-out;
+        }
+        .card:hover:before {
+            transform: scale(28);
+        }
+        .card:hover .small-desc {
+            transition: all 0.5s ease-out;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .card:hover .card-title {
+            transition: all 0.5s ease-out;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gestionar Usuarios</h1>
+    </div>
+    <div class="user-list">
+        <!-- Ejemplo de usuarios pendientes -->
+        <div class="user-item" id="user1">
+            <span>Usuario1</span>
+            <div>
+                <button onclick="approveUser('user1')">✔️</button>
+                <button onclick="denyUser('user1')">❌</button>
+                <button onclick="viewInfo('Usuario1')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user2">
+            <span>Usuario2</span>
+            <div>
+                <button onclick="approveUser('user2')">✔️</button>
+                <button onclick="denyUser('user2')">❌</button>
+                <button onclick="viewInfo('Usuario2')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user3">
+            <span>Usuario3</span>
+            <div>
+                <button onclick="approveUser('user3')">✔️</button>
+                <button onclick="denyUser('user3')">❌</button>
+                <button onclick="viewInfo('Usuario3')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user4">
+            <span>Usuario4</span>
+            <div>
+                <button onclick="approveUser('user4')">✔️</button>
+                <button onclick="denyUser('user4')">❌</button>
+                <button onclick="viewInfo('Usuario4')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user5">
+            <span>Usuario5</span>
+            <div>
+                <button onclick="approveUser('user5')">✔️</button>
+                <button onclick="denyUser('user5')">❌</button>
+                <button onclick="viewInfo('Usuario5')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user6">
+            <span>Usuario6</span>
+            <div>
+                <button onclick="approveUser('user6')">✔️</button>
+                <button onclick="denyUser('user6')">❌</button>
+                <button onclick="viewInfo('Usuario6')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user7">
+            <span>Usuario7</span>
+            <div>
+                <button onclick="approveUser('user7')">✔️</button>
+                <button onclick="denyUser('user7')">❌</button>
+                <button onclick="viewInfo('Usuario7')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user8">
+            <span>Usuario8</span>
+            <div>
+                <button onclick="approveUser('user8')">✔️</button>
+                <button onclick="denyUser('user8')">❌</button>
+                <button onclick="viewInfo('Usuario8')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user9">
+            <span>Usuario9</span>
+            <div>
+                <button onclick="approveUser('user9')">✔️</button>
+                <button onclick="denyUser('user9')">❌</button>
+                <button onclick="viewInfo('Usuario9')">Ver información</button>
+            </div>
+        </div>
+        <div class="user-item" id="user10">
+            <span>Usuario10</span>
+            <div>
+                <button onclick="approveUser('user10')">✔️</button>
+                <button onclick="denyUser('user10')">❌</button>
+                <button onclick="viewInfo('Usuario10')">Ver información</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar la información del usuario -->
+    <div class="modal fade" id="userInfoModal" tabindex="-1" aria-labelledby="userInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userInfoModalLabel">Información del Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido de la tarjeta -->
+                    <div class="card">
+                        <p class="card-title" id="modalUsername">Nombre de Usuario</p>
+                        <p class="small-desc" id="modalEmail">Correo: </p>
+                        <p class="small-desc" id="modalPassword">Contraseña: </p>
+                        <div class="go-corner">
+                            <div class="go-arrow">→</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Cargar estado de usuarios desde localStorage
+            for (let i = 1; i <= 10; i++) {
+                let userId = 'user' + i;
+                let status = localStorage.getItem(userId);
+                if (status) {
+                    document.getElementById(userId).style.display = 'none';
+                }
+            }
+        });
+
+        function approveUser(userId) {
+            localStorage.setItem(userId, 'approved');
+            document.getElementById(userId).style.display = 'none';
+        }
+
+        function denyUser(userId) {
+            localStorage.setItem(userId, 'denied');
+            document.getElementById(userId).style.display = 'none';
+        }
+
+        function viewInfo(username) {
+            var userData = {
+                username: username,
+                email: username + '@example.com',
+                password: '123456'
+            };
+
+            document.getElementById('modalUsername').innerText = 'Nombre de Usuario: ' + userData.username;
+            document.getElementById('modalEmail').innerText = 'Correo: ' + userData.email;
+            document.getElementById('modalPassword').innerText = 'Contraseña: ' + userData.password;
+
+            $('#userInfoModal').modal('show');
+        }
+    </script>
+</body>
+</html>

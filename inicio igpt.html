@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LongRaceCC - Inicio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #1DB954;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center; /* Centrado */
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    header button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    header button.emoji {
+      font-size: 24px;
+    }
+
+    main {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    section {
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    h2 {
+      color: #1DB954;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background-color: #1DB954;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #25B960;
+    }
+
+    .btn-like, .btn-comment {
+      background-color: transparent;
+      border: none;
+      color: #1DB954;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .btn-like:hover, .btn-comment:hover {
+      color: #25B960;
+    }
+
+    .btn-like.active, .btn-comment.active {
+      color: #FF4FD8;
+    }
+
+    .publicacion, .new-post {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: white;
+      width: 100%;
+      background-color: #282828;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .publicacion:hover, .new-post:hover {
+      transform: scale(1.05);
+    }
+
+    .publicacion-content, .new-post-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .publicacion-content h3, .new-post-content h3 {
+      margin: 0;
+    }
+
+    .interaction-buttons, .new-post-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .comment-form {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .comment-form textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #1DB954;
+      padding: 10px 0;
+      text-align: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    footer .icon-buttons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    footer button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      transition: transform 0.3s ease;
+    }
+
+    footer button:hover {
+      transform: translateY(-5px);
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .comments-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .comment {
+      padding: 10px;
+      background-color: #3a3a3a;
+      border-radius: 5px;
+    }
+
+    .new-post input, .new-post textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .new-post input[type="file"] {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .new-post label {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="btnInicio"><i class="fas fa-home"></i></button>
+  </header>
+
+  <main>
+    <section id="resumenSemanal">
+      <h2>Tu resumen semanal</h2>
+      <div class="resumen-info">
+        <span>Actividad: 4</span>
+        <span>Duración: 20 min</span>
+        <span>Distancia: 13 km</span>
+      </div>
+    </section>
+
+    <section id="retosSugeridos">
+      <h2>Retos pensados en ti!</h2>
+      <div class="reto">
+        <p>"Al final todo estara bien, si todo sigue igual es que aun no llegamos al final.".</p>
+        <p>Más de 100 usuarios interesados en las carreras.</p>
+        <h3>Desafío en Alcatraz proximamente!!</h3>
+        <button class="btn btnUnirse">Unirse al reto</button>
+      </div>
+    </section>
+
+    <section id="nuevaPublicacion">
+      <h2>Crear nueva publicación</h2>
+      <div class="new-post">
+        <div class="new-post-content">
+          <input type="text" id="nuevoAutor" placeholder="Tu nombre">
+          <label for="nuevaFoto">Subir imagen:</label>
+          <input type="file" id="nuevaFoto" accept="image/*">
+          <textarea id="nuevoComentario" placeholder="Escribe tu comentario"></textarea>
+        </div>
+        <div class="new-post-buttons">
+          <button class="btn" onclick="crearPublicacion()">Publicar</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="publicaciones">
+      <h2>Publicaciones de otros ciclistas</h2>
+      <!-- Publicaciones se agregarán aquí -->
+    </section>
+  </main>
+
+  <footer>
+    <div class="icon-buttons">
+      <button onclick="location.href='INICIO IGPT.HTML'"><i class="fas fa-home"></i></button>
+      <button onclick="location.href='MAPAS IGPT.HTML'"><i class="fas fa-map"></i></button>
+      <button onclick="location.href='REGISTRAR IGPT.HTML'"><i class="fas fa-edit"></i></button>
+      <button onclick="location.href='GruposIGPT.html'"><i class="fas fa-users"></i></button>
+      <button onclick="location.href='PERFIL IGPT.HTML'"><i class="fas fa-cog"></i></button>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', cargarPublicaciones);
+
+    function toggleLike(button) {
+      const likeCountSpan = button.querySelector('span');
+      let likeCount = parseInt(likeCountSpan.textContent);
+      if (button.classList.contains('active')) {
+        button.classList.remove('active');
+        likeCount--;
+      } else {
+        button.classList.add('active');
+        likeCount++;
+      }
+      likeCountSpan.textContent = likeCount;
+
+      const postId = button.closest('.publicacion').dataset.id;
+      actualizarLike(postId, likeCount);
+    }
+
+    function toggleCommentForm(button) {
+      const commentForm = button.parentNode.nextElementSibling;
+      commentForm.style.display = commentForm.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function postComment(button) {
+      const commentForm = button.parentNode;
+      const commentText = commentForm.querySelector('textarea').value;
+      if (commentText.trim() !== '') {
+        const commentsContainer = commentForm.nextElementSibling;
+        const newComment = document.createElement('div');
+        newComment.classList.add('comment');
+        newComment.textContent = commentText;
+        commentsContainer.appendChild(newComment);
+        commentForm.querySelector('textarea').value = '';
+        commentForm.style.display = 'none';
+
+        const postId = button.closest('.publicacion').dataset.id;
+        agregarComentario(postId, commentText);
+      } else {
+        alert('Por favor, escribe un comentario antes de publicarlo.');
+      }
+    }
+
+    function crearPublicacion() {
+      const autor = document.getElementById('nuevoAutor').value;
+      const fotoInput = document.getElementById('nuevaFoto');
+      const comentario = document.getElementById('nuevoComentario').value;
+
+      if (autor.trim() === '' || comentario.trim() === '') {
+        alert('Por favor, llena todos los campos.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const imgSrc = event.target.result;
+        agregarPublicacion(autor, imgSrc, comentario);
+      }
+
+      if (fotoInput.files[0]) {
+        reader.readAsDataURL(fotoInput.files[0]);
+      } else {
+        agregarPublicacion(autor, '', comentario);
+      }
+    }
+
+    function agregarPublicacion(autor, imgSrc, comentario) {
+      const publicacionesContainer = document.getElementById('publicaciones');
+      const newPost = document.createElement('div');
+      newPost.classList.add('publicacion');
+      const postId = new Date().getTime().toString();
+      newPost.dataset.id = postId;
+
+      newPost.innerHTML = `
+        <div class="publicacion-content">
+          <h3>${autor}</h3>
+          ${imgSrc ? `<img src="${imgSrc}" alt="Imagen de la publicación" style="max-width: 100%; margin-top: 10px;">` : ''}
+          <p>${comentario}</p>
+        </div>
+        <div class="interaction-buttons">
+          <button class="btn-like" onclick="toggleLike(this)"><i class="fas fa-heart"></i> <span>0</span> Me gusta</button>
+          <button class="btn-comment" onclick="toggleCommentForm(this)"><i class="fas fa-comment"></i> Comentar</button>
+        </div>
+        <div class="comment-form">
+          <textarea placeholder="Escribe tu comentario"></textarea>
+          <button class="btn" onclick="postComment(this)">Publicar comentario</button>
+        </div>
+        <div class="comments-container"></div>
+      `;
+
+      publicacionesContainer.prepend(newPost);
+
+      // Guardar la publicación en localStorage
+      const publicaciones = JSON.parse(localStorage.getItem('publicaciones')) || [];
+      publicaciones.push({
+        id: postId,
+        autor,
+        imgSrc,
+        comentario,
+        likes: 0,
+        comentarios: []
+      });
+      localStorage.setItem('publicaciones', JSON.stringify(publicaciones));
+
+      // Limpiar campos
+      document.getElementById('nuevoAutor').value = '';
+      document.getElementById('nuevaFoto').value = '';
+      document.getElementById('nuevoComentario').value = '';
+    }
+
+    function cargarPublicaciones() {
+      const publicaciones = JSON.parse(localStorage.getItem('publicaciones')) || [];
+      const publicacionesContainer = document.getElementById('publicaciones');
+      publicacionesContainer.innerHTML = '';
+
+      publicaciones.forEach(publicacion => {
+        const newPost = document.createElement('div');
+        newPost.classList.add('publicacion');
+        newPost.dataset.id = publicacion.id;
+
+        newPost.innerHTML = `
+          <div class="publicacion-content">
+            <h3>${publicacion.autor}</h3>
+            ${publicacion.imgSrc ? `<img src="${publicacion.imgSrc}" alt="Imagen de la publicación" style="max-width: 100%; margin-top: 10px;">` : ''}
+            <p>${publicacion.comentario}</p>
+          </div>
+          <div class="interaction-buttons">
+            <button class="btn-like ${publicacion.likes > 0 ? 'active' : ''}" onclick="toggleLike(this)"><i class="fas fa-heart"></i> <span>${publicacion.likes}</span> Me gusta</button>
+            <button class="btn-comment" onclick="toggleCommentForm(this)"><i class="fas fa-comment"></i> Comentar</button>
+          </div>
+          <div class="comment-form">
+            <textarea placeholder="Escribe tu comentario"></textarea>
+            <button class="btn" onclick="postComment(this)">Publicar comentario</button>
+          </div>
+          <div class="comments-container">
+            ${publicacion.comentarios.map(comentario => `<div class="comment">${comentario}</div>`).join('')}
+          </div>
+        `;
+
+        publicacionesContainer.prepend(newPost);
+      });
+    }
+
+    function actualizarLike(postId, likes) {
+      const publicaciones = JSON.parse(localStorage.getItem('publicaciones')) || [];
+      const index = publicaciones.findIndex(publicacion => publicacion.id === postId);
+      if (index !== -1) {
+        publicaciones[index].likes = likes;
+        localStorage.setItem('publicaciones', JSON.stringify(publicaciones));
+      }
+    }
+
+    function agregarComentario(postId, comentario) {
+      const publicaciones = JSON.parse(localStorage.getItem('publicaciones')) || [];
+      const index = publicaciones.findIndex(publicacion => publicacion.id === postId);
+      if (index !== -1) {
+        publicaciones[index].comentarios.push(comentario);
+        localStorage.setItem('publicaciones', JSON.stringify(publicaciones));
+      }
+    }
+  </script>
+</body>
+</html>
+

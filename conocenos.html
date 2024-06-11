@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LongRaceCC - Eventos de ciclismo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-O8C0LJnOthTYm8ckbz5RmlT16Ies8cuItRQL2v5lLlz5JlHZVxLrfx+dN+PZW1U2Xbo78J9dNjl9DEUlJZnU0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: #191414; /* Fondo negro tipo Spotify */
+            color: #ffffff;
+        }
+
+        .header {
+            background: #1DB954; /* Verde Spotify */
+            color: white;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .header .logo img {
+            margin-right: 10px;
+            width: 40px;
+            height: auto;
+        }
+
+        .header nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            background: url('https://chaton-files.s3.us-east-2.amazonaws.com/p/YYIgAipHgH4XkN5oaPMUU/lZK9WUrqTA2X5GdwDnkrh/0f8xxNREjpXbiOIWdJVjm1.jpeg') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 {
+            position: relative;
+            font-size: 2.5em;
+            z-index: 1;
+        }
+
+        .features {
+            text-align: center;
+            padding: 50px 10%;
+        }
+
+        .features h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .features p {
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            color: #b3b3b3; /* Texto gris claro */
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px 10%;
+        }
+
+        .card {
+            width: 300px;
+            padding: 10px;
+            background-image: linear-gradient(to right bottom, #1DB954, #1ED760, #1DB954, #1DB954, #1DB954);
+            background-size: 200% 200%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+        .card-int {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            font-size: 14px;
+            border-radius: 6px;
+            background-color: #333; /* Fondo de tarjeta negro */
+        }
+
+        .img {
+            width: 100%;
+            height: 175px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .card-data {
+            padding: 20px;
+            font-size: 14px;
+            color: #ffffff; /* Texto blanco */
+        }
+
+        .card__span {
+            font-family: 'Lucida Sans', sans-serif;
+            font-size: 11px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            color: #333; /* Texto negro */
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            background-image: linear-gradient(to right bottom, #1DB954, #1ED760, #1DB954, #1DB954, #1DB954);
+            background-size: 200% 200%;
+            border: none;
+            padding: 8px 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: transform 0.1s ease-in;
+        }
+
+        button:active {
+            transform: translateY(3px);
+        }
+
+        .card:hover, button:hover {
+            animation: gradient 0.8s ease-in 1;
+            transform: scale(1.05);
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 200% 200%;
+            }
+            100% {
+                background-position: 400% 400%;
+            }
+        }
+
+        .footer {
+            background: #1DB954;
+            color: white;
+            padding: 20px 10%;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+	.nav-button {
+    	   display: inline-block;
+    	   padding: 10px 20px;
+    	   margin: 0 10px;
+    	   background-color: #fff; /* Color de fondo blanco */
+    	   color: #333; /* Color del texto */
+    	   text-decoration: none;
+    	   border: 1px solid #333; /* Borde del botón */
+    	   border-radius: 5px; /* Borde redondeado */
+	}
+
+	.nav-button:hover {
+    	   background-color: #333; /* Cambio de color de fondo al pasar el ratón */
+    	   color: #fff; /* Cambio de color del texto al pasar el ratón */
+	}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://chaton-files.s3.us-east-2.amazonaws.com/p/FUKh9dEbTXBQnwpJFFmfq/qOJAlnjUWr66kv3HP8qJs/rJ5X6KK7ppfMBrtKbp92h1.jpeg">
+            LongRaceCC
+        </div>
+        <nav>
+    <a href="conocenos.html">Inicio</a>
+    <a href="soporte.html">A cerca de</a>
+    <a href="eventos.html">Eventos</a>
+    <a href="iniciosesion.html">Iniciar Sesión</a>
+</nav>
+    </header>
+    <div class="hero">
+        <h1>¡Siente la adrenalina del Ciclismo!</h1>
+    </div>
+    <div class="features">
+        <h2>¡Disfruta de nuestros eventos y de nuestras carreras!</h2>
+        <p>Únetenos y sé parte de nuestra comunidad de LongRaceCC, forma parte de nuestro equipo y únete a la diversión.</p>
+    </div>
+    <div class="card-container">
+        <article class="card">
+            <div class="card-int">
+                <span class="card__span">Evento</span>
+                <div class="img" style="background-image: url('https://chaton-files.s3.us-east-2.amazonaws.com/p/FUKh9dEbTXBQnwpJFFmfq/qOJAlnjUWr66kv3HP8qJs/zwpi1ufEGtV09Tr7ez9JM1.jpeg');"></div>
+                <div class="card-data">
+                    <p class="title">Evento de Atlantis</p>
+                    <p>Descubre los misterios y maravillas de Atlantis en este evento único. Sumérgete en la historia y cultura de esta legendaria civilización.</p>
+                    <button class="button">Más información</button>
+                </div>
+            </div>
+        </article>
+        <article class="card">
+            <div class="card-int">
+                <span class="card__span">Evento</span>
+                <div class="img" style="background-image: url('https://chaton-files.s3.us-east-2.amazonaws.com/p/cUZYwm5QKFhpnfQnBLW6p/WkehYQAqq8iyvJIQRilZX/PiDbu9RSnxdeJQkcchoZJ1.jpeg');"></div>
+                <div class="card-data">
+                    <p class="title">Evento de Alcatraz</p>
+                    <p>Explora la famosa prisión de Alcatraz y recorre las celdas con las historias de sus notorios reclusos. Una carrera llena de historia y misterio.</p>
+                    <button class="button">Más información</button>
+                </div>
+            </div>
+        </article>
+        <article class="card">
+            <div class="card-int">
+                <span class="card__span">Evento</span>
+                <div class="img" style="background-image: url('https://chaton-files.s3.us-east-2.amazonaws.com/p/cUZYwm5QKFhpnfQnBLW6p/WkehYQAqq8iyvJIQRilZX/oEMN1gZ300QEK0QL9X5OA1.jpeg');"></div>
+                <div class="card-data">
+                    <p class="title">Evento de Vietnam</p>
+                    <p>Adéntrate en la rica cultura y la fascinante historia de Vietnam en este evento exclusivo. Una experiencia inolvidable te espera.</p>
+                    <button class="button">Más información</button>
+                </div>
+            </div>
+        </article>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 LongRaceCC. Todos los derechos reservados.</p>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

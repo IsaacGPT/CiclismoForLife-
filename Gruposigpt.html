@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LongRaceCC - Grupos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome para los iconos -->
+  <style>
+    /* Estilos CSS */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #181818; /* Fondo oscuro */
+      margin: 0;
+      padding: 0;
+      color: #e0e0e0; /* Texto gris claro */
+    }
+
+    header {
+      background-color: #1DB954; /* Verde Spotify */
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    }
+
+    header .left-corner-buttons {
+      display: flex;
+    }
+
+    header button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 10px; /* Margen entre los botones */
+    }
+
+    header button.emoji {
+      font-size: 24px;
+    }
+
+    nav {
+      background-color: #1DB954; /* Verde Spotify */
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave */
+      margin-bottom: 20px;
+    }
+
+    nav button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 0 20px;
+      transition: color 0.3s ease;
+    }
+
+    nav button.active {
+      color: #FF4FD8; /* Rosa para el botón activo */
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-container {
+      display: flex;
+      justify-content: flex-end; /* Alinea las secciones a la derecha */
+    }
+
+    section {
+      display: none; /* Ocultamos todas las secciones por defecto */
+      margin-left: 20px; /* Añadido margen izquierdo para separación */
+      margin-bottom: 30px;
+      background-color: #222; /* Fondo un poco más claro */
+      padding: 20px;
+      border-radius: 10px; /* Bordes redondeados */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+      min-width: 300px;
+    }
+
+    section.active {
+      display: block; /* Mostramos la sección activa */
+    }
+
+    h2 {
+      color: #1DB954; /* Verde Spotify */
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background-color: #1DB954; /* Verde Spotify */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 10px; /* Margen entre botones */
+    }
+
+    .btn:hover {
+      background-color: #25B960; /* Verde Spotify más claro */
+    }
+
+    .btn.unido {
+      background-color: #FF4FD8; /* Rosa */
+    }
+
+    .reto, .club {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 20px;
+    }
+
+    .reto:hover, .club:hover {
+      transform: translateY(-5px);
+      background-color: #333;
+    }
+
+    .reto h3, .club h3 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .reto p, .club p {
+      margin-bottom: 10px;
+      color: #bbb;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #1DB954; /* Verde Spotify */
+      padding: 10px 0;
+      text-align: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave en la parte inferior */
+    }
+
+    footer .icon-buttons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    footer button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      transition: transform 0.3s ease;
+    }
+
+    footer button:hover {
+      transform: translateY(-5px); /* Movemos ligeramente hacia arriba al pasar el ratón */
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    /* Estilos de la carta */
+    .card {
+      position: relative;
+      background-color: #2a2a2a; /* Fondo acorde al estilo del sitio */
+      padding: 1em;
+      z-index: 5;
+      box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      max-width: 300px;
+      transition: 200ms ease-in-out;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 20px;
+    }
+
+    .username {
+      color: #C6E1ED;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+
+    .body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .body .text {
+      margin: 0 10px 0 0;
+      white-space: pre-line;
+      color: #c0c3d7;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      position: relative;
+      width: 100%;
+      color: #9fa4aa;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none;
+      margin-top: 10px;
+    }
+
+    .footer div {
+      margin-right: 1rem;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .footer svg {
+      margin-right: 5px;
+      height: 100%;
+      stroke: #9fa4aa;
+    }
+
+    .viewer span {
+      height: 20px;
+      width: 20px;
+      background-color: rgb(28, 117, 219);
+      margin-right: -6px;
+      border-radius: 50%;
+      border: 1px solid #fff;
+      display: grid;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: 8px;
+      color: #fff;
+      padding: 2px;
+    }
+
+    .viewer span svg {
+      stroke: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="btnInicio"><i class="fas fa-home"></i></button>
+    <div class="left-corner-buttons">
+      <button class="emoji" id="btnNotificaciones" onclick="mostrarNotificaciones()"><i class="fas fa-heart"></i></button>
+      <button class="emoji" id="btnBuscar" onclick="mostrarBuscador()"><i class="fas fa-search"></i></button>
+      <button class="emoji" id="btnMensaje" onclick="mostrarMensaje()"><i class="far fa-paper-plane"></i></button>
+    </div>
+  </header>
+
+  <nav>
+    <button id="btnRetos" class="active" onclick="mostrarSeccion('retos')">Retos</button>
+    <button id="btnClubes" onclick="mostrarSeccion('clubes')">Clubes</button>
+  </nav>
+
+  <main>
+    <div class="section-container">
+      <section id="retos" class="active">
+        <h2>Retos</h2>
+        <div class="card reto">
+          <h3>Ruta Atlántica</h3>
+          <p>Únete al desafío y disfruta de la belleza del océano Atlántico.</p>
+          <div class="body">
+            <div class="text">
+              ¡Vamos a conquistar la Ruta Atlántica juntos!
+            </div>
+            <div class="footer">
+              <div class="username">JohnDoe</div>
+              <div class="viewer">
+                <span>5</span>
+              </div>
+            </div>
+            <button class="btn" onclick="unirse(this, 'reto_ruta_atlantica')">Unirse al reto</button>
+            <button class="btn abandonar" onclick="abandonar(this, 'reto_ruta_atlantica')" style="display:none;">Abandonar</button>
+          </div>
+        </div>
+        <div class="card reto">
+          <h3>Recorrido por Vietnam</h3>
+          <p>Aventura única explorando las maravillas de Vietnam.</p>
+          <div class="body">
+            <div class="text">
+              ¡Descubre paisajes increíbles y culturas fascinantes!
+            </div>
+            <div class="footer">
+              <div class="username">Explorer</div>
+              <div class="viewer">
+                <span>7</span>
+              </div>
+            </div>
+            <button class="btn" onclick="unirse(this, 'reto_recorrido_vietnam')">Unirse al reto</button>
+            <button class="btn abandonar" onclick="abandonar(this, 'reto_recorrido_vietnam')" style="display:none;">Abandonar</button>
+          </div>
+        </div>
+        <div class="card reto">
+          <h3>En búsqueda del Titanic</h3>
+          <p>Sumérgete en la historia y busca los restos del Titanic.</p>
+          <div class="body">
+            <div class="text">
+              ¡Una expedición emocionante esperando por ti!
+            </div>
+            <div class="footer">
+              <div class="username">DiverDan</div>
+              <div class="viewer">
+                <span>2</span>
+              </div>
+            </div>
+            <button class="btn" onclick="unirse(this, 'reto_busqueda_titanic')">Unirse al reto</button>
+            <button class="btn abandonar" onclick="abandonar(this, 'reto_busqueda_titanic')" style="display:none;">Abandonar</button>
+          </div>
+        </div>
+       
+        </div>
+      </section>
+
+      <section id="clubes">
+        <h2>Clubes</h2>
+        <div class="card club">
+          <h3>Amantes del Senderismo</h3>
+          <p>Un espacio para compartir experiencias y rutas de senderismo.</p>
+          <div class="body">
+            <div class="text">
+              ¡No te pierdas nuestras rutas semanales de senderismo!
+            </div>
+            <div class="footer">
+              <div class="username">JaneDoe</div>
+              <div class="viewer">
+                <span>5</span>
+              </div>
+            </div>
+            <button class="btn" onclick="unirse(this, 'club_senderismo')">Unirse al club</button>
+            <button class="btn abandonar" onclick="abandonar(this, 'club_senderismo')" style="display:none;">Abandonar</button>
+          </div>
+        </div>
+        <div class="card club">
+          <h3>Ciclismo de Montaña</h3>
+          <p>Explora senderos y montañas con nuestro club de ciclismo.</p>
+          <div class="body">
+            <div class="text">
+              ¡Únete a nuestras aventuras en dos ruedas!
+            </div>
+            <div class="footer">
+              <div class="username">MountainBiker</div>
+              <div class="viewer">
+                <span>8</span>
+              </div>
+            </div>
+            <button class="btn" onclick="unirse(this, 'club_ciclismo_montana')">Unirse al club</button>
+            <button class="btn abandonar" onclick="abandonar(this, 'club_ciclismo_montana')" style="display:none;">Abandonar</button>
+          </div>
+        </div>
+        <div class="card club">
+          <h3>Ciclismo Urbano</h3>
+          <p>Descubre la ciudad en bicicleta y únete a nuestras rutas urbanas.</p>
+          <div class="body">
+            <div class="text">
+              ¡Explora la ciudad en dos ruedas!
+            </div>
+            <div class="footer">
+              <div class="username">UrbanCyclist</div>
+              <div class="viewer">
+                <span>10</span>
+              </div>
+            </div>
+            <button class="btn" onclick="unirse(this, 'club_ciclismo_urbano')">Unirse al club</button>
+            <button class="btn abandonar" onclick="abandonar(this, 'club_ciclismo_urbano')" style="display:none;">Abandonar</button>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="icon-buttons">
+      <button id="btnPerfil"><i class="fas fa-user"></i></button>
+      <button id="btnGrupos"><i class="fas fa-users"></i></button>
+      <button id="btnConfiguracion"><i class="fas fa-cog"></i></button>
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript para manejar la navegación y las acciones de los botones
+    function mostrarSeccion(seccion) {
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+
+      document.getElementById(seccion).classList.add('active');
+      document.getElementById('btn' + seccion.charAt(0).toUpperCase() + seccion.slice(1)).classList.add('active');
+    }
+
+    function unirse(boton, grupo) {
+      localStorage.setItem(grupo, 'unido');
+      actualizarEstadoBotones(grupo);
+    }
+
+    function abandonar(boton, grupo) {
+      localStorage.removeItem(grupo);
+      actualizarEstadoBotones(grupo);
+    }
+
+    function actualizarEstadoBotones(grupo) {
+      document.querySelectorAll('.btn').forEach(boton => {
+        if (boton.onclick && boton.onclick.toString().includes(grupo)) {
+          if (localStorage.getItem(grupo) === 'unido') {
+            boton.style.display = boton.classList.contains('abandonar') ? 'inline-block' : 'none';
+          } else {
+            boton.style.display = boton.classList.contains('abandonar') ? 'none' : 'inline-block';
+          }
+        }
+      });
+    }
+
+    // Cargar los estados al inicio
+    window.onload = function() {
+      const grupos = ['reto_ruta_atlantica', 'reto_recorrido_vietnam', 'reto_busqueda_titanic', 'reto_aventura_amazonas', 'club_senderismo', 'club_ciclismo_montana', 'club_ciclismo_urbano', 'club_ciclismo_ruta'];
+      grupos.forEach(grupo => {
+        actualizarEstadoBotones(grupo);
+      });
+    };
+
+    // Placeholder functions for header buttons
+    function mostrarNotificaciones() {
+      alert('Mostrando notificaciones...');
+    }
+
+    function mostrarBuscador() {
+      alert('Mostrando buscador...');
+    }
+
+    function mostrarMensaje() {
+      alert('Mostrando mensaje...');
+    }
+  </script>
+</body>
+</html>

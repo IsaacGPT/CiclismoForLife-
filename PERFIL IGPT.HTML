@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LongRaceCC - Perfil del Ciclista</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+        }
+        header {
+            background-color: #1DB954;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        header button.emoji {
+            font-size: 24px;
+        }
+        .config-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100%;
+            background-color: #1c1c1c;
+            border-left: 1px solid #1DB954;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        .config-menu.active {
+            display: block;
+            transform: translateX(0);
+        }
+        .config-menu a {
+            color: #fff;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #1DB954;
+            transition: background-color 0.3s ease;
+        }
+        .config-menu a:hover {
+            background-color: #25B960;
+        }
+        .config-menu .close-btn {
+            text-align: right;
+            padding: 10px 20px;
+        }
+        .config-menu .close-btn button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .profile-header {
+            text-align: center;
+            padding: 20px;
+            background-color: #1c1c1c;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .profile-header input[type="file"] {
+            display: none;
+        }
+        .profile-header h1 {
+            margin: 0;
+            color: #1DB954;
+        }
+        .profile-header p {
+            margin: 5px 0;
+        }
+        .profile-header .buttons {
+            margin-top: 10px;
+        }
+        .profile-header .buttons button {
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 5px;
+        }
+        .profile-header .buttons button:hover {
+            background-color: #25B960;
+        }
+        .profile-content {
+            padding: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat h3 {
+            margin: 0;
+            color: #1ED760;
+        }
+        .stat p {
+            margin: 5px 0 0 0;
+        }
+        .activities {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .activity {
+            margin-bottom: 10px;
+        }
+        .activity h4 {
+            margin: 0;
+        }
+        .activity p {
+            margin: 5px 0;
+        }
+        .chart-container {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1DB954;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        footer .icon-buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        footer button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+        footer button:hover {
+            transform: translateY(-5px);
+        }
+        .profile-form {
+            display: none;
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        .profile-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .profile-form input[type="text"], .profile-form input[type="file"], .profile-form input[type="number"], .profile-form input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #1DB954;
+            border-radius: 5px;
+            background-color: #121212;
+            color: #fff;
+        }
+        .profile-form button {
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .profile-form button:hover {
+            background-color: #25B960;
+        }
+        .background {
+            border-radius: 16px;
+            border: 1px solid #1a1a1a;
+            background: rgba(74, 74, 74, 0.39);
+            mix-blend-mode: luminosity;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.20);
+            backdrop-filter: blur(15px);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu__icon {
+            width: 24px;
+            height: 24px;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: end;
+            transition: transform .4s;
+        }
+        .menu__icon span {
+            width: 100%;
+            height: 0.25rem;
+            border-radius: 0.125rem;
+            background-color: rgb(0, 122, 255);
+            box-shadow: 0 .5px 2px 0 hsla(0, 0%, 0%, .2);
+            transition: width .4s, transform .4s, background-color .4s;
+        }
+        .menu__icon :nth-child(2) {
+            width: 75%;
+        }
+        .menu__icon :nth-child(3) {
+            width: 50%;
+        }
+        .menu__icon:hover {
+            transform: rotate(-90deg);
+        }
+        .menu__icon:hover span {
+            width: .25rem;
+            transform: translateX(-10px);
+            background-color: rgb(255, 59, 48);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button id="btnInicio" onclick="window.location.href='INICIO.html'">
+            <span class="background">
+                <i class="menu__icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </i>
+            </span>
+        </button>
+        <button class="emoji" onclick="toggleConfigMenu()">⚙️</button>
+    </header>
+
+    <div class="config-menu" id="configMenu">
+        <div class="close-btn">
+            <button onclick="toggleConfigMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <a href="Configuracion1.html">Configuración 1</a>
+        <a href="Configuracion2.html">Configuración 2</a>
+        <a href="Configuracion3.html">Configuración 3</a>
+        <a href="Logout.html">Cerrar sesión</a>
+    </div>
+
+    <div class="profile-header">
+        <img src="profile-picture.jpg" alt="Foto de perfil" id="profilePicture" onclick="triggerFileInput()">
+        <input type="file" id="fileInput" accept="image/*" onchange="changeProfilePicture(event)">
+        <h1 id="cyclistName">Nombre del Ciclista</h1>
+        <p id="cyclistLocation">Ubicación</p>
+        <div class="buttons">
+            <button id="editProfileButton">Editar Perfil</button>
+            <button id="showStatsButton">Mostrar Estadísticas</button>
+        </div>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-form" id="profileForm">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" placeholder="Nombre">
+            <label for="location">Ubicación:</label>
+            <input type="text" id="location" placeholder="Ubicación">
+            <label for="age">Edad:</label>
+            <input type="number" id="age" placeholder="Edad">
+            <label for="birthdate">Fecha de Nacimiento:</label>
+            <input type="date" id="birthdate">
+            <button id="saveProfileButton">Guardar Perfil</button>
+        </div>
+        <div class="stats" id="stats">
+            <div class="stat">
+                <h3>100</h3>
+                <p>Actividades</p>
+            </div>
+            <div class="stat">
+                <h3>2000 km</h3>
+                <p>Distancia</p>
+            </div>
+            <div class="stat">
+                <h3>100 h</h>
+                <p>Tiempo</p>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="activities">
+            <div class="activity">
+                <h4>Actividad 1</h4>
+                <p>Entrenamiento para la carrera del viernes</p>
+            </div>
+            <div class="activity">
+                <h4>Actividad 2</h4>
+                <p>Carrera de la vaia</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="icon-buttons">
+            <button id="btnPerfil" onclick="window.location.href='PERFIL IGPT.HTML'"><i class="fas fa-user"></i></button>
+            <button id="btnClubes" onclick="window.location.href='GruposIGPT.html'"><i class="fas fa-users"></i></button>
+            <button id="btnEventos" onclick="window.location.href='GruposIGPT.html'"><i class="fas fa-calendar-alt"></i></button>
+            <button id="btnRutas" onclick="window.location.href='MAPAS IGPT.HTML'"><i class="fas fa-map"></i></button>
+            <button id="btnConfiguracion" onclick="toggleConfigMenu()"><i class="fas fa-cog"></i></button>
+        </div>
+    </footer>
+
+    <script>
+        const toggleConfigMenu = () => {
+            const configMenu = document.getElementById('configMenu');
+            configMenu.classList.toggle('active');
+        }
+
+        const triggerFileInput = () => {
+            document.getElementById('fileInput').click();
+        }
+
+        const changeProfilePicture = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const result = e.target.result;
+                    document.getElementById('profilePicture').src = result;
+                    localStorage.setItem('profilePicture', result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.getElementById('editProfileButton').addEventListener('click', () => {
+            document.getElementById('profileForm').style.display = 'block';
+            document.getElementById('stats').style.display = 'none';
+        });
+
+        document.getElementById('showStatsButton').addEventListener('click', () => {
+            document.getElementById('stats').style.display = 'flex';
+            document.getElementById('profileForm').style.display = 'none';
+        });
+
+        document.getElementById('saveProfileButton').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const location = document.getElementById('location').value;
+            const age = document.getElementById('age').value;
+            const birthdate = document.getElementById('birthdate').value;
+
+            localStorage.setItem('name', name);
+            localStorage.setItem('location', location);
+            localStorage.setItem('age', age);
+            localStorage.setItem('birthdate', birthdate);
+
+            document.getElementById('cyclistName').textContent = name;
+            document.getElementById('cyclistLocation').textContent = location;
+
+            document.getElementById('profileForm').style.display = 'none';
+            document.getElementById('stats').style.display = 'flex';
+        });
+
+        window.onload = () => {
+            const name = localStorage.getItem('name');
+            const location = localStorage.getItem('location');
+            const age = localStorage.getItem('age');
+            const birthdate = localStorage.getItem('birthdate');
+            const profilePicture = localStorage.getItem('profilePicture');
+
+            if (name) document.getElementById('cyclistName').textContent = name;
+            if (location) document.getElementById('cyclistLocation').textContent = location;
+            if (age) document.getElementById('age').value = age;
+            if (birthdate) document.getElementById('birthdate').value = birthdate;
+            if (profilePicture) document.getElementById('profilePicture').src = profilePicture;
+        }
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
+                datasets: [{
+                    label: 'Kilómetros recorridos',
+                    data: [3, 50, 70, 47, 60, 90, 25],
+                    backgroundColor: 'rgba(30, 215, 96, 0.2)',
+                    borderColor: 'rgba(30, 215, 96, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
